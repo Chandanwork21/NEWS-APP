@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import News from "./components/News";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import Footer from './components/Footer';
 import LoadingBar from "react-top-loading-bar";
+import { Analytics } from "@vercel/analytics/react"
 
 const App = () => {
   const pageSize = 5;
@@ -26,7 +26,7 @@ const App = () => {
           <Route path="/technology" exact element={<News setProgress={setProgress} apiKey={apiKey} key="technology" pageSize={pageSize} country="us" category="technology"/>} />
         </Routes>
       </Router>
-      {/* <Footer/> */}
+      <Analytics />
     </div>
   );
 };
