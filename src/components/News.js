@@ -3,8 +3,9 @@ import NewsItem from "./NewsItem";
 import Spinner from "./Spinner";
 import PropTypes from "prop-types";
 import InfiniteScroll from "react-infinite-scroll-component";
+import noImage from "./noImage.jpg" // if the articles doesn't contain any images.
 
-const News = ({ country, pageSize, category, apiKey, setProgress }) => {
+const News = ({ country = "us", pageSize = 8, category = "general", apiKey, setProgress }) => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -58,30 +59,24 @@ const News = ({ country, pageSize, category, apiKey, setProgress }) => {
       >
         <div className="container">
           <div className="row">
-            {articles.map((element, index) => (
-              <div className="col-md-4" key={element.url || index}>
-                <NewsItem
-                  title={element.title || "No title available"}
-                  description={element.description || "No description available"}
-                  imageurl={element.urlToImage || "https://via.placeholder.com/300"}
-                  newsurl={element.url}
-                  author={element.author || "Unknown"}
-                  date={element.publishedAt}
-                  source={element.source?.name || "Unknown"}
-                />
-              </div>
+          {articles.map((element, index) => (
+            <div className="col-md-4" key={element.url ? element.url + index : index}>
+          <NewsItem
+             title={element.title || "No title available"}
+             description={element.description || "No description available"}
+             imageurl={element.urlToImage || noImage}  
+             newsurl={element.url}
+             author={element.author || "Unknown"}
+             date={element.publishedAt}
+             source={element.source?.name || "Unknown"}
+    />
+  </div>
             ))}
           </div>
         </div>
       </InfiniteScroll>
     </div>
   );
-};
-
-News.defaultProps = {
-  country: "us",
-  pageSize: 8,
-  category: "general",
 };
 
 News.propTypes = {

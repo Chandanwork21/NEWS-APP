@@ -1,4 +1,5 @@
 import React from "react";
+import noImage from "./noImage.jpg" // if the articles doesn't contain any images.
 
 const NewsItem = (props)=> {
     let { title, description, imageurl, newsurl, author, date, source } = props;
@@ -9,7 +10,7 @@ const NewsItem = (props)=> {
             <span className="position-absolute top-0  translate-middle badge rounded-pill text-bg-danger " style={{left:'80%',zindex:'1'}}>
              Source: {source}
             </span>
-            <img src={!imageurl ? "https://media.kcentv.com/assets/KCEN/images/bae2a88d-a2ad-4915-896e-bac155464013/20250123T010107/bae2a88d-a2ad-4915-896e-bac155464013_1140x641.jpg": imageurl } alt={source} className="text-white"/>
+            <img src={!imageurl ? noImage: imageurl } alt={source} className="text-white"/>
             <div className="card-body text-white">
               <h5 className="card-title">{title} </h5>
               <p className="card-text"> {description}</p>
